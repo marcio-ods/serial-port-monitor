@@ -112,6 +112,11 @@
                     placeholder="BaudRate"
                   />
                 </div>
+                <div class="menu-keyboard">
+                  <label>Ctr+r reload</label>
+                  <label>Ctr+Shift+R force reload</label>
+                  <label>Ctr+Shift+I depurador</label>
+                </div>
               </div>
             </div>
           </div>
@@ -120,6 +125,7 @@
             <div class="head-main">
               <input
                 id="input-path"
+                placeholder="caminho dos logs"
                 aria-label="caminho do txt"
                 disabled="disabled"
               />
@@ -130,9 +136,10 @@
                 <div class="div-textarea">
                   <textarea
                     id="disp-text-1"
-                    placeholder="logs"
+                    placeholder="log porta 1"
+                    disabled="disabled"
                     class="form-control"
-                    rows="15"
+                    rows="17"
                   ></textarea>
                 </div>
                 <div class="btn-group">
@@ -148,9 +155,10 @@
                 <div class="div-textarea">
                   <textarea
                     id="disp-text-msg"
-                    placeholder="logs"
+                    placeholder="log all"
+                    disabled="disabled"
                     class="form-control"
-                    rows="15"
+                    rows="17"
                   ></textarea>
                 </div>
                 <div class="btn-group">
@@ -166,9 +174,11 @@
                 <div class="div-textarea">
                   <textarea
                     id="disp-text-2"
-                    placeholder="logs"
+                    placeholder="log porta 2"
+                    disabled="disabled"
+                    disabled="disabled"
                     class="form-control"
-                    rows="15"
+                    rows="17"
                   ></textarea>
                 </div>
                 <div class="btn-group">
@@ -186,9 +196,16 @@
 
       <footer class="toolbar toolbar-footer">
         <h1 class="title">
-          Marcio Oliveira da Silva - DETIC | <span>marcio_ods@hotmail.com</span>
+          <span>marcio_ods@hotmail.com</span> |
+          <span>https://github.com/marcio-ods/serial_port_monitor</span>
         </h1>
       </footer>
+      <!-- 
+      <footer class="toolbar toolbar-footer">
+        <h1 class="title">
+          Marcio Oliveira da Silva - DETIC | <span>marcio_ods@hotmail.com</span>
+        </h1>
+      </footer> -->
     </div>
     <!-- <body onload="setup()">
     <h1>Hello World!</h1>

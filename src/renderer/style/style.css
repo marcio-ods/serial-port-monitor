@@ -11,7 +11,7 @@
   padding: 0.5em;
 }
 .head-main {
-  padding: 0.5em;
+  padding: 0.6em;
   /* margin-bottom: -1rem; */
   width: 100%;
 }
@@ -28,7 +28,7 @@
   /* margin-top: 0.1em; */
   text-align: center;
   font-weight: bold;
-  font-size: 15px;
+  font-size: 12px;
 }
 .disp-port-1 {
   padding: 0.5em;
@@ -55,6 +55,18 @@
   line-height: 150%;
   padding: 0.8em 0.2em;
 }
+.menu-keyboard {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid gray;
+  line-height: 90%;
+  padding: 0.5em 0.5em 0em 0.5em;
+}
+/* padding-top
+padding-right
+padding-bottom
+padding-left */
 
 .element-input-port {
   text-align: center;

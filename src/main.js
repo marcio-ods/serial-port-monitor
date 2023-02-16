@@ -4,8 +4,9 @@ const makeData = require('./utils/makeData')
 
 const createWindow = () => {
     const win = new BrowserWindow({
-        width: 845,
-        height: 600,
+        width: 850,
+        height: 615,
+        autoHideMenuBar: true,
         webPreferences: {
             preload: path.join(__dirname, 'preload', 'preload.js')
         }
