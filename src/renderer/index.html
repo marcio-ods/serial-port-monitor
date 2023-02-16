@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <title>Monitor de porta serial</title>
+    <link rel="stylesheet" href="style/photon/css/photon.min.css" />
+    <link rel="stylesheet" href="style/style.css" />
+  </head>
+  <body>
+    <div class="window">
+      <header class="toolbar toolbar-header">
+        <div class="btn-actions">
+          <button
+            type="button"
+            id="btn-connect"
+            class="btn btn-form btn-positive"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="15"
+              height="15"
+              fill="#000000"
+              viewBox="0 0 256 256"
+            >
+              <rect width="256" height="256" fill="none"></rect>
+              <path
+                d="M228.1,121.2,84.2,33.2A8,8,0,0,0,72,40V216a8,8,0,0,0,12.2,6.8l143.9-88A7.9,7.9,0,0,0,228.1,121.2Z"
+                fill="none"
+                stroke="#000000"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="24"
+              ></path>
+            </svg>
+          </button>
+          <button
+            type="button"
+            id="btn-disconnect"
+            class="btn btn-form btn-negative"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="15"
+              height="15"
+              fill="#000000"
+              viewBox="0 0 256 256"
+            >
+              <rect width="256" height="256" fill="none"></rect>
+              <rect
+                x="52"
+                y="52"
+                width="152"
+                height="152"
+                rx="6.9"
+                fill="none"
+                stroke="#000000"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="24"
+              ></rect>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <div class="window-content">
+        <div class="pane-group">
+          <!-- MENU -->
+          <div class="pane-sm sidebar">
+            <a href="https://github.com/marcio-ods/serial_port_monitor">
+              <img
+                id="img-menu"
+                src="./serial-port-icon-12.jpg"
+                width="150"
+                height="120"
+              />
+            </a>
+            <div class="menu">
+              <div class="form-group">
+                <div class="input-port">
+                  <label class="label-port">Porta 1:</label>
+                  <input
+                    id="input-port-1"
+                    type="text"
+                    class="form-control element-input-port"
+                    value="COM1"
+                    placeholder="Porta 1"
+                  />
+                </div>
+                <div class="input-port">
+                  <label class="label-port">Porta 2:</label>
+                  <input
+                    id="input-port-2"
+                    type="text"
+                    class="form-control element-input-port"
+                    value="COM2"
+                    placeholder="Porta 2"
+                  />
+                </div>
+                <div class="input-port">
+                  <label class="label-port">Taxa de Transmissão:</label>
+                  <input
+                    id="input-baud-rate"
+                    type="number"
+                    class="form-control element-input-port"
+                    value="9600"
+                    placeholder="BaudRate"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- MENU -->
+          <div class="pane main">
+            <div class="head-main">
+              <input
+                id="input-path"
+                aria-label="caminho do txt"
+                disabled="disabled"
+              />
+            </div>
+            <div class="display">
+              <div class="disp-port-1">
+                <h5 class="title display-name">Porta 1</h5>
+                <div class="div-textarea">
+                  <textarea
+                    id="disp-text-1"
+                    placeholder="logs"
+                    class="form-control"
+                    rows="15"
+                  ></textarea>
+                </div>
+                <div class="btn-group">
+                  <button class="btn btn-mini btn-primary">abrir</button>
+                  <button class="btn btn-mini btn-default">
+                    limpar console
+                  </button>
+                  <button class="btn btn-mini btn-negative">excluir log</button>
+                </div>
+              </div>
+              <div class="disp-msg">
+                <h5 class="display-name title">Mensagens</h5>
+                <div class="div-textarea">
+                  <textarea
+                    id="disp-text-msg"
+                    placeholder="logs"
+                    class="form-control"
+                    rows="15"
+                  ></textarea>
+                </div>
+                <div class="btn-group">
+                  <button class="btn btn-mini btn-primary">abrir</button>
+                  <button class="btn btn-mini btn-default">
+                    limpar console
+                  </button>
+                  <button class="btn btn-mini btn-negative">excluir log</button>
+                </div>
+              </div>
+              <div class="disp-port-2">
+                <h5 class="display-name title">Porta 2</h5>
+                <div class="div-textarea">
+                  <textarea
+                    id="disp-text-2"
+                    placeholder="logs"
+                    class="form-control"
+                    rows="15"
+                  ></textarea>
+                </div>
+                <div class="btn-group">
+                  <button class="btn btn-mini btn-primary">abrir</button>
+                  <button class="btn btn-mini btn-default">
+                    limpar console
+                  </button>
+                  <button class="btn btn-mini btn-negative">excluir log</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="toolbar toolbar-footer">
+        <h1 class="title">
+          Marcio Oliveira da Silva - DETIC | <span>marcio_ods@hotmail.com</span>
+        </h1>
+      </footer>
+    </div>
+    <!-- <body onload="setup()">
+    <h1>Hello World!</h1>
+    We are using Node.js <span id="node-version"></span>, Chromium
+    <span id="chrome-version"></span>, and Electron
+    <span id="electron-version"></span>.
+
+    <p>👋</p>
+    <p id="info"></p> -->
+  </body>
+
+  <script src="renderer.js"></script>
+</html>

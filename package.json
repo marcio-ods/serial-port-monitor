@@ -1,0 +1,51 @@
+{
+  "name": "serial-port-monitor",
+  "version": "1.0.0",
+  "description": "Serial Port Monitor is a utility that creates a channel between two serial ports, and generates message traffic logs. It uses electron and the serialPort lib.",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron ./src",
+    "dev": "electron --disable-software-rasterizer .\\src\\main.js",
+    "icon": "electron-icon-builder --input=D:\\GitHub\\serial-port-monitor\\public\\download2.jpg --output=./public",
+    "build": "rmdir /s /q D:\\GitHub\\serial-port-monitor\\dist && electron-builder -w -c.extraMetadata.main=src/main.js"
+  },
+  "build": {
+    "appId": "marcio_ods.electron.serial.port.monitor",
+    "productName": "serial-port-monitor",
+    "icon": "public\\icons\\win\\icon.ico",
+    "files": [
+      "src/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "public"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcio-ods/serial-port-monitor.git"
+  },
+  "keywords": [
+    "Electron",
+    "serialport",
+    "electron-builder",
+    "demo"
+  ],
+  "author": {
+    "name": "Marcio",
+    "email": "marcio_ods@hotmail.com"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcio-ods/serial-port-monitor/issues"
+  },
+  "homepage": "https://github.com/marcio-ods/serial-port-monitor#readme",
+  "devDependencies": {
+    "electron": "^23.1.0",
+    "electron-builder": "^23.6.0"
+  },
+  "dependencies": {
+    "jquery": "^3.6.3",
+    "serialport": "^10.5.0"
+  }
+}

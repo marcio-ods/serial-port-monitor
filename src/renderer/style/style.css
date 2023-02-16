@@ -1,0 +1,88 @@
+.menu {
+  margin: 1em;
+  max-width: 300px;
+  font-weight: bold;
+}
+
+.main {
+  padding: 0.5em;
+}
+.btn-actions {
+  padding: 0.5em;
+}
+.head-main {
+  padding: 0.5em;
+  /* margin-bottom: -1rem; */
+  width: 100%;
+}
+#input-path {
+  width: 100%;
+  font-weight: bold;
+}
+.display {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.display-name {
+  padding: 0.3em;
+  /* margin-top: 0.1em; */
+  text-align: center;
+  font-weight: bold;
+  font-size: 15px;
+}
+.disp-port-1 {
+  padding: 0.5em;
+  /* background-color: yellow; */
+}
+.disp-port-2 {
+  padding: 0.5em;
+  /* background-color: red; */
+}
+.disp-msg {
+  padding: 0.5em;
+  /* background-color: blue; */
+}
+
+.btn-menu {
+  display: flex;
+  justify-content: center;
+}
+.input-port {
+  display: grid;
+  justify-content: center;
+  margin-bottom: 1em;
+  border: 1px solid gray;
+  line-height: 150%;
+  padding: 0.8em 0.2em;
+}
+
+.element-input-port {
+  text-align: center;
+}
+#img-menu {
+  padding: 0.5em;
+}
+.label-port {
+  /* width: 100%; */
+  /* display: inline-block; */
+  /* max-width: 100px; */
+  /* margin: 1em; */
+}
+
+#input-port-1 {
+  /* display: inline-block; */
+  max-width: 100px;
+}
+#input-port-2 {
+  max-width: 100px;
+}
+#input-baud-rate {
+  margin-left: 13%;
+  max-width: 100px;
+}
+#disp-text-1 {
+}
+#disp-text-2 {
+}
+#disp-text-mgs {
+}
