@@ -1,11 +1,12 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 const makeData = require('./utils/makeData')
-
+const setup = require('./state/state').makeUnique()
+const getConfigs = require("./utils/getConfigs")
 const createWindow = () => {
     const win = new BrowserWindow({
-        width: 850,
-        height: 615,
+        minWidth: 850,
+        minHeight: 615,
         autoHideMenuBar: true,
         webPreferences: {
             preload: path.join(__dirname, 'preload', 'preload.js')
@@ -13,6 +14,9 @@ const createWindow = () => {
     })
 
     ipcMain.handle('ping', () => 'pong')
+
+
+
     win.loadFile(path.join(__dirname, 'renderer', 'index.html'))
 }
 
@@ -26,4 +30,16 @@ app.whenReady().then(() => {
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })
+})
+
+ipcMain.handle('get-setup', async () => {
+    const setup = await getConfigs()
+    console.log(setup);
+    return {
+        baudRate: setup.baud_rate,
+        port1: setup.port_1,
+        port2: setup.port_2,
+        directory: setup.directory,
+        // we can also expose variables, not just functions
+    }
 })

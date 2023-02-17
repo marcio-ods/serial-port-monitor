@@ -17,6 +17,7 @@ module.exports = function makeData() {
             port_1: "",
             port_2: "",
             baud_rate: "",
+            directory: dir
         }), { encoding: "utf-8", flag: "w+" })
 
     for (const it of ["log_port_1.txt", "log_port_2.txt", "log_msg.txt"]) {

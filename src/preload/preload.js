@@ -1,12 +1,10 @@
 const { contextBridge, ipcRenderer } = require('electron')
 
-
 contextBridge.exposeInMainWorld('setup', {
-    baudRate: () => 9600,
-    port1: () => "COM1",
-    port2: () => "COM2",
+    get: () => ipcRenderer.invoke('get-setup'),
     // we can also expose variables, not just functions
 })
+
 
 contextBridge.exposeInMainWorld('versions', {
     node: () => process.versions.node,
