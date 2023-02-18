@@ -70,21 +70,23 @@ window.addEventListener('DOMContentLoaded', async () => {
     if (baudRate) baudRate.value = setup.baud_rate
     if (directory) directory.value = setup.directory
 
-    // displayMsg.value = "oi kkk"
-    // dispPort1.value = "oi sadas"
-    // dispPort2.value = "oi lll"
     serialPort = await window.api.connect()
 
     if (btnOnOff) btnOnOff.onclick = async () => {
-        console.log(btnOnOff.value);
         if (btnOnOff.value === "on") {
             btnOnOff.value = "off";
             btnOnOff.checked = false;
-            serialPort?.send('on:port', 'disconnect')
+            serialPort?.send('on:port', { key: 'disconnect' })
         } else {
             btnOnOff.value = "on";
             btnOnOff.checked = true;
-            serialPort.send('on:port', 'connect')
+            serialPort.send('on:port', {
+                key: 'connect', data: {
+                    port1: inputPort1.value.trim(),
+                    port2: inputPort2.value.trim(),
+                    baudRate: baudRate.value.trim()
+                }
+            })
         }
         // const socket = await window.api.socket({ key: 'get/setup' })
 

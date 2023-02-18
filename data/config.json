@@ -1,6 +1,1 @@
-{
-    "port_1": "A",
-    "port_2": "b",
-    "baud_rate": "",
-    "directory": ""
-}
+{"port_1":"COM10","port_2":"COM12","baud_rate":"9600","directory":"E:\\GitHub\\serial-port-monitor\\data"}

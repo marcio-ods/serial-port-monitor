@@ -1,4 +1,6 @@
 const { SerialPort } = require('serialport')
+const getConfigs = require('../utils/getConfigs')
+const setConfigs = require('../utils/setConfigs')
 
 let UniqueInstance, Port1, Port2, Win = undefined
 module.exports = class UseSerialPort {
@@ -67,19 +69,21 @@ module.exports = class UseSerialPort {
         this.portReadable(win, port1, port2)
     }
 
-    async connect(win) {
+    async connect(win, data) {
         Win = win
 
+        console.log(data);
+
         const port1 = Port1 || new SerialPort({
-            path: "COM10",
-            baudRate: 9600,
+            path: data.port1,
+            baudRate: parseInt(data.baudRate),
         })
 
         Port1 = port1
 
         const port2 = Port2 || new SerialPort({
-            path: "COM12",
-            baudRate: 9600,
+            path: data.port2,
+            baudRate: parseInt(data.baudRate),
         })
         Port2 = port2
 
@@ -88,6 +92,8 @@ module.exports = class UseSerialPort {
         console.info(`Porta_1:${port1.path} | Porta_2:${port2.path} | Taxa:${port1.baudRate}`);
 
         this.on(win, port1, port2)
+        setConfigs(data)
+
         // console.log(await SerialPort.list());
     }
 

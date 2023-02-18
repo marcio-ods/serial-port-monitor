@@ -33,11 +33,12 @@ module.exports = function route(win) {
         }, 1000)
     })
 
-    ipcMain.on('on:port', (event, key) => {
-        if (key === "connect")
-            UseSerialPort.makeUnique().connect(win)
+    ipcMain.on('on:port', (event, { key, data }) => {
         if (key === "disconnect")
             UseSerialPort.makeUnique().disconnect(win)
+        if (key === "connect") {
+            UseSerialPort.makeUnique().connect(win, data)
+        }
     })
 }
 
