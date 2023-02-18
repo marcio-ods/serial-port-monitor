@@ -1,3 +1,4 @@
+// https://dev.to/taw/electron-adventures-episode-13-svelte-1m13
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 const makeData = require('./utils/makeData')
@@ -6,8 +7,8 @@ const makeData = require('./utils/makeData')
 const router = require('./router')
 const createWindow = () => {
     const win = new BrowserWindow({
-        minWidth: 850,
-        minHeight: 615,
+        minWidth: 855,
+        minHeight: 670,
         autoHideMenuBar: true,
         webPreferences: {
             preload: path.join(__dirname, 'preload', 'preload.js')
@@ -16,8 +17,6 @@ const createWindow = () => {
 
     // ipcMain.handle('ping', () => 'pong')
     router(win)
-
-
     win.loadFile(path.join(__dirname, 'renderer', 'index.html'))
 }
 

@@ -10,10 +10,6 @@ function setDisplay(value) {
 
 contextBridge.exposeInMainWorld('api', {
     request: (payload) => ipcRenderer.invoke('router', payload),
-    // socket: () => ipcRenderer.on('asynchronous-reply', (_event, arg) => {
-    //     console.log(arg)
-    //     setDisplay(arg)
-    // }),
     connect: () => ipcRenderer.on('on:port', (_event, args) => {
         // console.log(arg)
         const { key, data } = args

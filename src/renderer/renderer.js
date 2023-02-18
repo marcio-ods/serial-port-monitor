@@ -1,14 +1,17 @@
 // const { SerialPort } = require('serialport')
 
-let inputPort1,
+let
+    serialPort,
+    inputPort1,
     inputPort2,
     directory,
     baudRate,
+    textLogsApp,
     dispPort1,
     dispPort2,
     displayMsg,
-    btnConnect,
-    btnDisConnect,
+    btnOnOff,
+    btnOpenPath,
     btnOpenTxtPort1,
     btnOpenTxtPort2,
     btnOpenTxtMsg,
@@ -36,14 +39,16 @@ window.addEventListener('DOMContentLoaded', async () => {
     baudRate = document.getElementById('input-baud-rate')
     directory = document.getElementById('input-path')
 
+    // textarea
+    textLogsApp = document.getElementById('text-logs-app')
     displayMsg = document.getElementById('disp-text-msg')
     dispPort1 = document.getElementById('disp-text-1')
     dispPort2 = document.getElementById('disp-text-2')
+    // textarea
 
     // buttons    
-    btnConnect = document.getElementById('btn-connect')
-    btnDisConnect = document.getElementById('btn-disconnect')
-
+    btnOpenPath = document.getElementById('btn-open-path')
+    btnOnOff = document.getElementById('btn-on-off')
     btnOpenTxtMsg = document.getElementById('btn-open-txt-msg')
     btnOpenTxtPort1 = document.getElementById('btn-open-txt-port-1')
     btnOpenTxtPort2 = document.getElementById('btn-open-txt-port-2')
@@ -59,20 +64,6 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 
     const setup = await window.api.request({ key: 'get/setup' })
-    const socket = await window.api.connect()
-    // const socket = await window.api.socket({ key: 'get/setup' })
-
-    socket.send('on:port', 'connect')
-
-    setTimeout(() => {
-        socket.send('on:port', 'disconnect')
-        //     window.api.connect().send('on:port', 'disconnect')
-
-    }, 1000)
-    // socket.send('asynchronous-message', 'ping')
-    // console.log(socket);
-
-
 
     if (inputPort1) inputPort1.value = setup.port_1
     if (inputPort2) inputPort2.value = setup.port_2
@@ -82,11 +73,39 @@ window.addEventListener('DOMContentLoaded', async () => {
     // displayMsg.value = "oi kkk"
     // dispPort1.value = "oi sadas"
     // dispPort2.value = "oi lll"
+    serialPort = await window.api.connect()
+
+    if (btnOnOff) btnOnOff.onclick = async () => {
+        console.log(btnOnOff.value);
+        if (btnOnOff.value === "on") {
+            btnOnOff.value = "off";
+            btnOnOff.checked = false;
+            serialPort?.send('on:port', 'disconnect')
+        } else {
+            btnOnOff.value = "on";
+            btnOnOff.checked = true;
+            serialPort.send('on:port', 'connect')
+        }
+        // const socket = await window.api.socket({ key: 'get/setup' })
+
+        // btnConnect. 
+        // setTimeout(() => {
+        //     //     window.api.connect().send('on:port', 'disconnect')
+
+        // }, 1000)
+        // socket.send('asynchronous-message', 'ping')
+        // console.log(socket);
+    }
+
+    // if (btnDisConnect) btnDisConnect.onclick = () => {
+    //     serialPort?.send('on:port', 'disconnect')
+    // }
 
     if (btnCleanTxtMsg) btnCleanTxtMsg.onclick = () => displayMsg.value = ""
     if (btnCleanTxtPort1) btnCleanTxtPort1.onclick = () => dispPort1.value = ""
     if (btnCleanTxtPort2) btnCleanTxtPort2.onclick = () => dispPort2.value = ""
 
+    if (btnOpenPath) btnOpenPath.onclick = async () => window.api.request({ key: 'open-path' })
     if (btnOpenTxtMsg) btnOpenTxtMsg.onclick = () => window.api.request({ key: 'open-txt-msg' })
     if (btnOpenTxtPort1) btnOpenTxtPort1.onclick = () => window.api.request({ key: 'open-txt-port-1' })
     if (btnOpenTxtPort2) btnOpenTxtPort2.onclick = () => window.api.request({ key: 'open-txt-port-2' })

@@ -10,61 +10,34 @@
     <title>Monitor de porta serial</title>
     <link rel="stylesheet" href="style/photon/css/photon.min.css" />
     <link rel="stylesheet" href="style/style.css" />
+    <link rel="stylesheet" href="style/switch.css" />
   </head>
   <body>
     <div class="window">
-      <header class="toolbar toolbar-header">
-        <div class="btn-actions">
-          <button
-            type="button"
-            id="btn-connect"
-            class="btn btn-form btn-positive"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="15"
-              height="15"
-              fill="#000000"
-              viewBox="0 0 256 256"
-            >
-              <rect width="256" height="256" fill="none"></rect>
-              <path
-                d="M228.1,121.2,84.2,33.2A8,8,0,0,0,72,40V216a8,8,0,0,0,12.2,6.8l143.9-88A7.9,7.9,0,0,0,228.1,121.2Z"
-                fill="none"
-                stroke="#000000"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="24"
-              ></path>
-            </svg>
+      <header class="toolbar toolbar-header app-header-toolbar">
+        <div class="btn-group group-path">
+          <button id="btn-open-path" class="btn btn-mini btn-primary">
+            abrir
           </button>
-          <button
-            type="button"
-            id="btn-disconnect"
-            class="btn btn-form btn-negative"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="15"
-              height="15"
-              fill="#000000"
-              viewBox="0 0 256 256"
-            >
-              <rect width="256" height="256" fill="none"></rect>
-              <rect
-                x="52"
-                y="52"
-                width="152"
-                height="152"
-                rx="6.9"
-                fill="none"
-                stroke="#000000"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="24"
-              ></rect>
-            </svg>
+          <input
+            id="input-path"
+            placeholder="caminho dos logs"
+            aria-label="caminho do txt"
+            disabled="disabled"
+          />
+
+          <button id="btn-reload" class="btn btn-mini btn-default">
+            Force Reload
           </button>
+          <button id="btn-open-debugger" class="btn btn-mini btn-default">
+            Depurador
+          </button>
+        </div>
+        <div class="btn-toolbar">
+          <label class="switch btn btn-form" for="btn-on-off">
+            <input id="btn-on-off" type="checkbox" value="off" />
+            <span class="slider round"></span>
+          </label>
         </div>
       </header>
 
@@ -123,23 +96,25 @@
           <!-- MENU -->
           <div class="pane main">
             <div class="head-main">
-              <input
-                id="input-path"
-                placeholder="caminho dos logs"
-                aria-label="caminho do txt"
+              <label for="text-logs-app " class="label-main">Depurador</label>
+              <textarea
+                id="text-logs-app"
+                placeholder="logs do aplicativo"
                 disabled="disabled"
-              />
+                class="form-control"
+                rows="5"
+              ></textarea>
             </div>
             <div class="display">
               <div class="disp-port-1">
-                <h5 class="title display-name">Porta 1</h5>
+                <label class="title display-name label-main">Porta 1</label>
                 <div class="div-textarea">
                   <textarea
                     id="disp-text-1"
                     placeholder="log porta 1"
                     disabled="disabled"
                     class="form-control"
-                    rows="17"
+                    rows="16"
                   ></textarea>
                 </div>
                 <div class="btn-group">
@@ -164,14 +139,14 @@
                 </div>
               </div>
               <div class="disp-msg">
-                <h5 class="display-name title">Mensagens</h5>
+                <label class="display-name title label-main">Mensagens</label>
                 <div class="div-textarea">
                   <textarea
                     id="disp-text-msg"
                     placeholder="log all"
                     disabled="disabled"
                     class="form-control"
-                    rows="17"
+                    rows="16"
                   ></textarea>
                 </div>
                 <div class="btn-group">
@@ -196,7 +171,7 @@
                 </div>
               </div>
               <div class="disp-port-2">
-                <h5 class="display-name title">Porta 2</h5>
+                <label class="display-name title label-main">Porta 2</label>
                 <div class="div-textarea">
                   <textarea
                     id="disp-text-2"
@@ -204,7 +179,7 @@
                     disabled="disabled"
                     disabled="disabled"
                     class="form-control"
-                    rows="17"
+                    rows="16"
                   ></textarea>
                 </div>
                 <div class="btn-group">

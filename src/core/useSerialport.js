@@ -1,4 +1,4 @@
-const { SerialPort, ReadlineParser } = require('serialport')
+const { SerialPort } = require('serialport')
 
 let UniqueInstance, Port1, Port2, Win = undefined
 module.exports = class UseSerialPort {
@@ -33,20 +33,15 @@ module.exports = class UseSerialPort {
             console.log('disconnect');
             await Port1.close()
             win.webContents.send('on:port', { key: "close:port1", data: "porta 1 encerrada" })
+            Port1 = undefined
         }
+
         if (Port2?.isOpen) {
             await Port2.close()
             console.log('disconnect');
             win.webContents.send('on:port', { key: "close:port2", data: "porta 2 encerrada" })
+            Port2 = undefined
         }
-        // Port1.close(function (err) {
-        //     console.log("erro:port1", err);
-        //     win.webContents.send('on:port', { key: "erro:port1", data: err.message })
-        // });
-        // Port2.close(function (err) {
-        //     console.log("erro:port2", err);
-        //     win.webContents.send('on:port', { key: "erro:port2", data: err.message })
-        // });
     }
 
     portError(key, win, port) {
@@ -94,8 +89,6 @@ module.exports = class UseSerialPort {
 
         this.on(win, port1, port2)
         // console.log(await SerialPort.list());
-
-
     }
 
     static makeUnique() {
