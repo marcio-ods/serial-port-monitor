@@ -1,8 +1,9 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 const makeData = require('./utils/makeData')
-const setup = require('./state/state').makeUnique()
-const getConfigs = require("./utils/getConfigs")
+// const setup = require('./state/state').makeUnique()
+// const getConfigs = require("./utils/getConfigs")
+const router = require('./router')
 const createWindow = () => {
     const win = new BrowserWindow({
         minWidth: 850,
@@ -13,9 +14,8 @@ const createWindow = () => {
         }
     })
 
-    ipcMain.handle('ping', () => 'pong')
-
-
+    // ipcMain.handle('ping', () => 'pong')
+    router()
 
     win.loadFile(path.join(__dirname, 'renderer', 'index.html'))
 }
@@ -32,14 +32,14 @@ app.whenReady().then(() => {
     })
 })
 
-ipcMain.handle('get-setup', async () => {
-    const setup = await getConfigs()
-    console.log(setup);
-    return {
-        baudRate: setup.baud_rate,
-        port1: setup.port_1,
-        port2: setup.port_2,
-        directory: setup.directory,
-        // we can also expose variables, not just functions
-    }
-})
+// ipcMain.handle('get-setup', async () => {
+//     const setup = await getConfigs()
+//     console.log(setup);
+//     return {
+//         baudRate: setup.baud_rate,
+//         port1: setup.port_1,
+//         port2: setup.port_2,
+//         directory: setup.directory,
+//         // we can also expose variables, not just functions
+//     }
+// })

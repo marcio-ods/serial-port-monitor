@@ -1,42 +1,106 @@
-// console.log($.);
+// const { SerialPort } = require('serialport')
 
-// const information = document.getElementById('info')
-// information.innerText = `This app is using Chrome (v${versions.chrome()}), Node.js (v${versions.node()}), and Electron (v${versions.electron()})`
+let inputPort1,
+    inputPort2,
+    directory,
+    baudRate,
+    dispPort1,
+    dispPort2,
+    dispMsg,
+    btnConnect,
+    btnDisConnect,
+    btnOpenTxtPort1,
+    btnOpenTxtPort2,
+    btnOpenTxtMsg,
+    btnCleanTxtPort1,
+    btnCleanTxtPort2,
+    btnCleanTxtMsg;
 
-// const inputPort1 = document.getElementById('input-port-1')
-// inputPort1.value = setup.port1()
-// console.log("input-port-1");
-// const inputPort2 = document.getElementById('input-port-2')
-// inputPort2.value = setup.port2()
-// const baudRate = document.getElementById('input-baud-rate')
-// baudRate.value = setup.baudRate()
-// const directory = document.getElementById('input-path')
-// directory.value = setup.directory()
+
+const btnDeleteDisabled = (btn) => {
+    btn.classList.remove("btn-primary");
+    btn.disabled = true;
+}
+const btnDeleteActive = (btn) => {
+    btn.disabled = false;
+    btn.classList.add("btn-primary");
+}
+
+window.addEventListener('DOMContentLoaded', async () => {
+    // require('serialport/package')
+    inputPort1 = document.getElementById('input-port-1')
+    inputPort2 = document.getElementById('input-port-2')
+    baudRate = document.getElementById('input-baud-rate')
+    directory = document.getElementById('input-path')
+
+    dispMsg = document.getElementById('disp-text-msg')
+    dispPort1 = document.getElementById('disp-text-1')
+    dispPort2 = document.getElementById('disp-text-2')
+
+    // buttons    
+    btnConnect = document.getElementById('btn-connect')
+    btnDisConnect = document.getElementById('btn-disconnect')
+
+    btnOpenTxtMsg = document.getElementById('btn-open-txt-msg')
+    btnOpenTxtPort1 = document.getElementById('btn-open-txt-port-1')
+    btnOpenTxtPort2 = document.getElementById('btn-open-txt-port-2')
+
+    btnCleanTxtMsg = document.getElementById('btn-clean-txt-msg')
+    btnCleanTxtPort1 = document.getElementById('btn-clean-txt-port-1')
+    btnCleanTxtPort2 = document.getElementById('btn-clean-txt-port-2')
+
+    btnDeleteTxtMsg = document.getElementById('btn-delete-txt-msg')
+    btnDeleteTxtPort1 = document.getElementById('btn-delete-txt-port-1')
+    btnDeleteTxtPort2 = document.getElementById('btn-delete-txt-port-2')
+    // buttons
 
 
-(async () => {
-    const response = await window.versions.ping()
-    console.log(response) // prints out 'pong'
-})();
+    const setup = await window.bridge.request({ key: 'setup' })
 
-setTimeout(async () => {
-    const response = await window.setup.get()
-    console.log(response) // prints out 'pong' 
-}, 100)
-window.onload = async () => {
-    // console.log('page is fully loaded');
-    // removeQuestions();
-    const response = await window.setup.get()
-    console.log(response) // prints out 'pong'
-};
+    if (inputPort1) inputPort1.value = setup.port_1
+    if (inputPort2) inputPort2.value = setup.port_2
+    if (baudRate) baudRate.value = setup.baud_rate
+    if (directory) directory.value = setup.directory
 
-(async () => {
-    const response = await window.setup.get()
-    console.log(response) // prints out 'pong'
-})()
-// func()
+    // dispMsg.value = "oi kkk"
+    // dispPort1.value = "oi sadas"
+    // dispPort2.value = "oi lll"
 
-    // (async () => {
-    //     const response = await window.setup.get()
-    //     console.log(response) // prints out 'pong'
-    // })()
+    if (btnCleanTxtMsg) btnCleanTxtMsg.onclick = () => dispMsg.value = ""
+    if (btnCleanTxtPort1) btnCleanTxtPort1.onclick = () => dispPort1.value = ""
+    if (btnCleanTxtPort2) btnCleanTxtPort2.onclick = () => dispPort2.value = ""
+
+    if (btnOpenTxtMsg) btnOpenTxtMsg.onclick = () => window.bridge.request({ key: 'open-txt-msg' })
+    if (btnOpenTxtPort1) btnOpenTxtPort1.onclick = () => window.bridge.request({ key: 'open-txt-port-1' })
+    if (btnOpenTxtPort2) btnOpenTxtPort2.onclick = () => window.bridge.request({ key: 'open-txt-port-2' })
+
+    if (btnOpenTxtMsg) btnOpenTxtMsg.onclick = () => window.bridge.request({ key: 'open-txt-msg' })
+    if (btnOpenTxtPort1) btnOpenTxtPort1.onclick = () => window.bridge.request({ key: 'open-txt-port-1' })
+    if (btnOpenTxtPort2) btnOpenTxtPort2.onclick = () => window.bridge.request({ key: 'open-txt-port-2' })
+
+
+    if (btnDeleteTxtMsg) btnDeleteTxtMsg.onclick = async () => {
+        dispMsg.value = ""
+        btnDeleteDisabled(btnOpenTxtMsg)
+        await window.bridge.request({ key: 'delete-txt-msg' })
+        btnDeleteActive(btnOpenTxtMsg)
+    }
+
+    if (btnDeleteTxtPort1) btnDeleteTxtPort1.onclick = async () => {
+        dispPort1.value = ""
+        btnDeleteDisabled(btnOpenTxtPort1)
+        await window.bridge.request({ key: 'delete-txt-port-1' })
+        btnDeleteActive(btnOpenTxtPort1)
+    }
+
+    if (btnDeleteTxtPort2) btnDeleteTxtPort2.onclick = async () => {
+        dispPort2.value = ""
+        btnDeleteDisabled(btnOpenTxtPort2)
+        await window.bridge.request({ key: 'delete-txt-port-2' })
+        btnDeleteActive(btnOpenTxtPort2)
+    }
+
+    // if (element) element.innerText = text
+
+})
+

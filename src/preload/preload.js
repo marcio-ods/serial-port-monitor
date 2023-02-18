@@ -1,27 +1,45 @@
 const { contextBridge, ipcRenderer } = require('electron')
 
-contextBridge.exposeInMainWorld('setup', {
-    get: () => ipcRenderer.invoke('get-setup'),
-    // we can also expose variables, not just functions
+
+contextBridge.exposeInMainWorld('bridge', {
+    request: (payload) => ipcRenderer.invoke('router', payload)
 })
 
+// if (inputPort1) inputPort1.value = setup.port_1
+// if (inputPort2) inputPort2.value = setup.port_2
+// if (baudRate) baudRate.value = setup.baud_rate
+// if (directory) directory.value = setup.directory
 
-contextBridge.exposeInMainWorld('versions', {
-    node: () => process.versions.node,
-    chrome: () => process.versions.chrome,
-    electron: () => process.versions.electron,
-    ping: () => ipcRenderer.invoke('ping'),
-    // we can also expose variables, not just functions
-})
 
-window.addEventListener('DOMContentLoaded', () => {
 
-    const replaceText = (selector, text) => {
-        const element = document.getElementById(selector)
-        if (element) element.innerText = text
-    }
+function LOG(id, label, msg) {
+    const msgLog = `${label} -> ${msg}\n`
 
-    for (const dependency of ['chrome', 'node', 'electron']) {
-        replaceText(`${dependency}-version`, process.versions[dependency])
-    }
-})
+    // if (id === "port-1-logs") {
+    //     myLogs1 += msgLog
+    //     document.getElementById(id).value = myLogs1
+    //     appendFile(pathLogs1, myLogs1)
+    //     console.log(myLogs2)
+    // }
+
+    // if (id === "port-2-logs") {
+    //     myLogs2 += msgLog
+    //     document.getElementById(id).value = myLogs2
+    //     appendFile(pathLogs2, myLogs2)
+    //     console.log(myLogs2)
+    // }
+
+    // appendFile(txtPath, msgLog)
+    console.log(msgLog)
+}
+
+// window.addEventListener('DOMContentLoaded', () => {
+//     require('serialport/package')
+    // for (const versionType of['chrome', 'electron', 'node']) {
+    //     document.getElementById(`${versionType}-version`).innerText = process.versions[versionType]
+    // }
+
+    // document.getElementById('serialport-version').innerText = require('serialport/package').version
+
+
+// })

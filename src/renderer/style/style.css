@@ -7,6 +7,24 @@
 .main {
   padding: 0.5em;
 }
+
+.btn-disabled {
+  border-color: #333;
+  border-bottom-color: #333;
+  background-color: #333;
+  /* border-color: #29a03b;
+  border-bottom-color: #248b34;
+  background-color: #5bd46d; */
+  /* background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5bd46d), color-stop(100%, #29a03b));
+  background-image: -webkit-linear-gradient(top, #5bd46d 0%, #29a03b 100%);
+  background-image: linear-gradient(to bottom, #5bd46d 0%, #29a03b 100%); */
+}
+.btn-disabled:active {
+  /* background-color: #34c84a; */
+  /* background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #34c84a), color-stop(100%, #248b34));
+  background-image: -webkit-linear-gradient(top, #34c84a 0%, #248b34 100%);
+  background-image: linear-gradient(to bottom, #34c84a 0%, #248b34 100%); */
+}
 .btn-actions {
   padding: 0.5em;
 }

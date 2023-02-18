@@ -13,8 +13,12 @@ module.exports = async function getConfigs() {
         baud_rate: "",
         directory: "",
     }
-    if (!existsSync(configPath))
-        resp = await readFile(configPath, { encoding: "utf8" })
+    if (existsSync(configPath))
+        resp = JSON.parse(await readFile(configPath, { encoding: "utf8" }))
+    resp.port_1 = resp.port_1.trim() || 'COM1'
+    resp.port_2 = resp.port_2.trim() || 'COM2'
+    resp.baud_rate = resp.baud_rate.trim() || 9600
+    resp.directory = resp.directory.trim() || dir
     return resp
 }
 

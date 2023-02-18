@@ -6,7 +6,6 @@
   "scripts": {
     "start": "electron ./src",
     "dev": "electron --disable-software-rasterizer .\\src\\main.js",
-    "icon": "electron-icon-builder --input=D:\\GitHub\\serial-port-monitor\\public\\download2.jpg --output=./public",
     "build": "rmdir /s /q D:\\GitHub\\serial-port-monitor\\dist && electron-builder -w -c.extraMetadata.main=src/main.js"
   },
   "build": {
@@ -45,7 +44,6 @@
     "electron-builder": "^23.6.0"
   },
   "dependencies": {
-    "jquery": "^3.6.3",
     "serialport": "^10.5.0"
   }
 }
