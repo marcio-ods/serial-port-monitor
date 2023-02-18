@@ -6,7 +6,7 @@ let inputPort1,
     baudRate,
     dispPort1,
     dispPort2,
-    dispMsg,
+    displayMsg,
     btnConnect,
     btnDisConnect,
     btnOpenTxtPort1,
@@ -27,13 +27,16 @@ const btnDeleteActive = (btn) => {
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
-    // require('serialport/package')
+    // navigator.serial.addEventListener('connect', (e) => {
+    //     // Connect to `e.target` or add it to a list of available ports.
+    // });
+
     inputPort1 = document.getElementById('input-port-1')
     inputPort2 = document.getElementById('input-port-2')
     baudRate = document.getElementById('input-baud-rate')
     directory = document.getElementById('input-path')
 
-    dispMsg = document.getElementById('disp-text-msg')
+    displayMsg = document.getElementById('disp-text-msg')
     dispPort1 = document.getElementById('disp-text-1')
     dispPort2 = document.getElementById('disp-text-2')
 
@@ -55,48 +58,62 @@ window.addEventListener('DOMContentLoaded', async () => {
     // buttons
 
 
-    const setup = await window.bridge.request({ key: 'setup' })
+    const setup = await window.api.request({ key: 'get/setup' })
+    const socket = await window.api.connect()
+    // const socket = await window.api.socket({ key: 'get/setup' })
+
+    socket.send('on:port', 'connect')
+
+    setTimeout(() => {
+        socket.send('on:port', 'disconnect')
+        //     window.api.connect().send('on:port', 'disconnect')
+
+    }, 1000)
+    // socket.send('asynchronous-message', 'ping')
+    // console.log(socket);
+
+
 
     if (inputPort1) inputPort1.value = setup.port_1
     if (inputPort2) inputPort2.value = setup.port_2
     if (baudRate) baudRate.value = setup.baud_rate
     if (directory) directory.value = setup.directory
 
-    // dispMsg.value = "oi kkk"
+    // displayMsg.value = "oi kkk"
     // dispPort1.value = "oi sadas"
     // dispPort2.value = "oi lll"
 
-    if (btnCleanTxtMsg) btnCleanTxtMsg.onclick = () => dispMsg.value = ""
+    if (btnCleanTxtMsg) btnCleanTxtMsg.onclick = () => displayMsg.value = ""
     if (btnCleanTxtPort1) btnCleanTxtPort1.onclick = () => dispPort1.value = ""
     if (btnCleanTxtPort2) btnCleanTxtPort2.onclick = () => dispPort2.value = ""
 
-    if (btnOpenTxtMsg) btnOpenTxtMsg.onclick = () => window.bridge.request({ key: 'open-txt-msg' })
-    if (btnOpenTxtPort1) btnOpenTxtPort1.onclick = () => window.bridge.request({ key: 'open-txt-port-1' })
-    if (btnOpenTxtPort2) btnOpenTxtPort2.onclick = () => window.bridge.request({ key: 'open-txt-port-2' })
+    if (btnOpenTxtMsg) btnOpenTxtMsg.onclick = () => window.api.request({ key: 'open-txt-msg' })
+    if (btnOpenTxtPort1) btnOpenTxtPort1.onclick = () => window.api.request({ key: 'open-txt-port-1' })
+    if (btnOpenTxtPort2) btnOpenTxtPort2.onclick = () => window.api.request({ key: 'open-txt-port-2' })
 
-    if (btnOpenTxtMsg) btnOpenTxtMsg.onclick = () => window.bridge.request({ key: 'open-txt-msg' })
-    if (btnOpenTxtPort1) btnOpenTxtPort1.onclick = () => window.bridge.request({ key: 'open-txt-port-1' })
-    if (btnOpenTxtPort2) btnOpenTxtPort2.onclick = () => window.bridge.request({ key: 'open-txt-port-2' })
+    if (btnOpenTxtMsg) btnOpenTxtMsg.onclick = () => window.api.request({ key: 'open-txt-msg' })
+    if (btnOpenTxtPort1) btnOpenTxtPort1.onclick = () => window.api.request({ key: 'open-txt-port-1' })
+    if (btnOpenTxtPort2) btnOpenTxtPort2.onclick = () => window.api.request({ key: 'open-txt-port-2' })
 
 
     if (btnDeleteTxtMsg) btnDeleteTxtMsg.onclick = async () => {
-        dispMsg.value = ""
+        displayMsg.value = ""
         btnDeleteDisabled(btnOpenTxtMsg)
-        await window.bridge.request({ key: 'delete-txt-msg' })
+        await window.api.request({ key: 'delete-txt-msg' })
         btnDeleteActive(btnOpenTxtMsg)
     }
 
     if (btnDeleteTxtPort1) btnDeleteTxtPort1.onclick = async () => {
         dispPort1.value = ""
         btnDeleteDisabled(btnOpenTxtPort1)
-        await window.bridge.request({ key: 'delete-txt-port-1' })
+        await window.api.request({ key: 'delete-txt-port-1' })
         btnDeleteActive(btnOpenTxtPort1)
     }
 
     if (btnDeleteTxtPort2) btnDeleteTxtPort2.onclick = async () => {
         dispPort2.value = ""
         btnDeleteDisabled(btnOpenTxtPort2)
-        await window.bridge.request({ key: 'delete-txt-port-2' })
+        await window.api.request({ key: 'delete-txt-port-2' })
         btnDeleteActive(btnOpenTxtPort2)
     }
 

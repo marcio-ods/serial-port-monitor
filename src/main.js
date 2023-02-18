@@ -15,7 +15,8 @@ const createWindow = () => {
     })
 
     // ipcMain.handle('ping', () => 'pong')
-    router()
+    router(win)
+
 
     win.loadFile(path.join(__dirname, 'renderer', 'index.html'))
 }

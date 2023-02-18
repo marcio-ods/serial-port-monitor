@@ -1,8 +1,41 @@
 const { contextBridge, ipcRenderer } = require('electron')
+let displayMsg
 
+function setDisplay(value) {
+    if (displayMsg) {
+        const msg = displayMsg.value + value
+        displayMsg.value = msg
+    }
+}
 
-contextBridge.exposeInMainWorld('bridge', {
-    request: (payload) => ipcRenderer.invoke('router', payload)
+contextBridge.exposeInMainWorld('api', {
+    request: (payload) => ipcRenderer.invoke('router', payload),
+    // socket: () => ipcRenderer.on('asynchronous-reply', (_event, arg) => {
+    //     console.log(arg)
+    //     setDisplay(arg)
+    // }),
+    connect: () => ipcRenderer.on('on:port', (_event, args) => {
+        // console.log(arg)
+        const { key, data } = args
+        if (key === "erro:port1") {
+            // setLabel Port1 vermelho
+            console.log("erro:port1", data)
+        }
+        if (key === "erro:port2") {
+            // setLabel Port2 vermelho
+            console.log("erro:port2", data)
+        }
+        if (key === "close:port1" || key === "close:port2") {
+            // setLabel Port2 vermelho
+            console.log("erro:port2", data)
+        }
+
+        setDisplay(data)
+        // setDisplay(arg)
+        // console.log(displayMsg) // prints "pong" in the DevTools console
+        // console.log(arg) // prints "pong" in the DevTools console
+    })
+
 })
 
 // if (inputPort1) inputPort1.value = setup.port_1
@@ -11,30 +44,12 @@ contextBridge.exposeInMainWorld('bridge', {
 // if (directory) directory.value = setup.directory
 
 
-
-function LOG(id, label, msg) {
-    const msgLog = `${label} -> ${msg}\n`
-
-    // if (id === "port-1-logs") {
-    //     myLogs1 += msgLog
-    //     document.getElementById(id).value = myLogs1
-    //     appendFile(pathLogs1, myLogs1)
-    //     console.log(myLogs2)
-    // }
-
-    // if (id === "port-2-logs") {
-    //     myLogs2 += msgLog
-    //     document.getElementById(id).value = myLogs2
-    //     appendFile(pathLogs2, myLogs2)
-    //     console.log(myLogs2)
-    // }
-
-    // appendFile(txtPath, msgLog)
-    console.log(msgLog)
-}
-
-// window.addEventListener('DOMContentLoaded', () => {
-//     require('serialport/package')
+window.addEventListener('DOMContentLoaded', () => {
+    displayMsg = document.getElementById('disp-text-msg')
+    // const serialPort = new SerialPort()
+    // const serialPort = require('serialport')
+    // console.log(serialPort)
+    //     require('serialport/package')
     // for (const versionType of['chrome', 'electron', 'node']) {
     //     document.getElementById(`${versionType}-version`).innerText = process.versions[versionType]
     // }
@@ -42,4 +57,4 @@ function LOG(id, label, msg) {
     // document.getElementById('serialport-version').innerText = require('serialport/package').version
 
 
-// })
+})
