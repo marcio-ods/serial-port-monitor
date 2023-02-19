@@ -1,6 +1,7 @@
 // const { SerialPort } = require('serialport')
 
 let
+    devtools = false,
     serialPort,
     inputPort1,
     inputPort2,
@@ -111,7 +112,16 @@ window.addEventListener('DOMContentLoaded', async () => {
     if (btnOpenTxtPort1) btnOpenTxtPort1.onclick = async () => window.api.request({ key: 'open-path', data: "log_port_1.txt" })
     if (btnOpenTxtPort2) btnOpenTxtPort2.onclick = async () => window.api.request({ key: 'open-path', data: "log_port_2.txt" })
 
-    if (btnOpenDevTools) btnOpenDevTools.onclick = async () => window.api.request({ key: 'open-dev-tools' })
+    if (btnOpenDevTools) btnOpenDevTools.onclick = async () => window.api.request({ key: 'dev-tools' })
+    // {
+    //     devtools = !devtools
+    //     console.log(devtools);
+    //     if (devtools)
+    //         return window.api.request({ key: 'open-dev-tools' })
+    //     else
+    //         return window.api.request({ key: 'close-dev-tools' })
+
+    // }
 
 
     if (btnReloadIgnoringCache) btnReloadIgnoringCache.onclick = async () => {
@@ -157,23 +167,49 @@ window.addEventListener('DOMContentLoaded', async () => {
         if (event.key === "F4")
             btnOpenPath.click();
         if (event.key === "F5")
+            btnDeleteTxtPort1.click();
+        if (event.key === "F6")
+            btnDeleteTxtPort2.click();
+        if (event.key === "F7")
+            btnDeleteTxtMsg.click();
+        if (event.key === "F8")
+            alert("ajuda")
+        if (event.key === "F9")
             btnOnOff.click();
+        if (event.key === "F10")
+            btnReloadIgnoringCache.click();
+        if (event.key === "F12")
+            btnOpenDevTools.click();
     });
+
     // object.addEventListener("focusout", myScript);
-    addEventListener('focus', (event) => {
-        directory?.classList.add("app-active")
-        // imageMenu.add("app-active")
-    });
+    // addEventListener('focus', (event) => {
+    //     directory?.classList.add("app-active")
+    //     // imageMenu.add("app-active")
+    // });
 
-    addEventListener('focusin', (event) => {
-        directory?.classList.add("app-active")
-        // imageMenu.add("app-active")
-    });
+    // addEventListener('focusin', (event) => {
+    //     directory?.classList.add("app-active")
+    //     // imageMenu.add("app-active")
+    // });
 
-    addEventListener('focusout', (event) => {
-        directory?.classList.remove("app-active")
-    });
+    // addEventListener('focusout', (event) => {
+    //     directory?.classList.remove("app-active")
+    // });
     // if (element) element.innerText = text
+    // document.querySelector(".app-focus").addEventListener('focusin', (event) => {
+    //     console.log('oi');
+    //     directory?.classList.add("app-active")
+    //     // imageMenu.add("app-active")
+    // })
+    // document.querySelector(".app-focus").addEventListener('focusout', (event) => {
+    //     directory?.classList.remove("app-active")
+    // });
+    // .addEventListener("blur", function () {
+
+    //     //   const $log = document.querySelector("#log");
+    //     //   $log.innerText += "\r\nLost focus";
+    // })
 
 })
 

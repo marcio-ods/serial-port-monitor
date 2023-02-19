@@ -13,10 +13,10 @@
     <link rel="stylesheet" href="style/switch.css" />
   </head>
   <body>
-    <div class="window">
-      <header class="toolbar toolbar-header app-header-toolbar">
-        <div class="btn-group group-path">
-          <button id="btn-open-path" class="btn btn-mini btn-primary">
+    <div class="window app-focus">
+      <header class="toolbar toolbar-header app-header-toolbar app-focus">
+        <div class="btn-group group-path app-focus">
+          <button id="btn-open-path" class="btn btn-mini btn-primary app-focus">
             abrir
           </button>
           <input
@@ -24,30 +24,33 @@
             placeholder="caminho dos logs"
             aria-label="caminho do txt"
             disabled="disabled"
+            class="app-focus"
           />
-
           <button
             id="btn-reload-ignoring-cache"
-            class="btn btn-mini btn-default"
+            class="btn btn-mini btn-default app-focus"
           >
             Force Reload
           </button>
-          <button id="btn-open-dev-tools" class="btn btn-mini btn-default">
+          <button
+            id="btn-open-dev-tools"
+            class="btn btn-mini btn-default app-focus"
+          >
             Depurador
           </button>
         </div>
         <div class="btn-toolbar">
-          <label class="switch btn btn-form" for="btn-on-off">
+          <label class="switch btn btn-form app-focus" for="btn-on-off">
             <input id="btn-on-off" type="checkbox" value="off" />
-            <span class="slider round"></span>
+            <span class="slider round app-focus"></span>
           </label>
         </div>
       </header>
 
-      <div class="window-content">
-        <div class="pane-group">
+      <div class="window-content app-focus">
+        <div class="pane-group app-focus">
           <!-- MENU -->
-          <div class="pane-sm sidebar">
+          <div class="pane-sm sidebar app-focus">
             <!-- <a href="https://github.com/marcio-ods/serial_port_monitor"> -->
             <div id="div-img-menu">
               <img
@@ -58,39 +61,41 @@
               />
             </div>
             <!-- </a> -->
-            <div class="menu">
-              <div class="form-group">
-                <div class="input-port">
-                  <label class="label-port">Porta 1:</label>
+            <div class="menu app-focus">
+              <div class="form-group app-focus">
+                <div class="input-port app-focus">
+                  <label class="label-port app-focus">Porta 1:</label>
                   <input
                     id="input-port-1"
                     type="text"
-                    class="form-control element-input-port"
+                    class="form-control element-input-port app-focus"
                     value="COM1"
                     placeholder="Porta 1"
                   />
                 </div>
-                <div class="input-port">
-                  <label class="label-port">Porta 2:</label>
+                <div class="input-port app-focus">
+                  <label class="label-port app-focus">Porta 2:</label>
                   <input
                     id="input-port-2"
                     type="text"
-                    class="form-control element-input-port"
+                    class="form-control element-input-port app-focus"
                     value="COM2"
                     placeholder="Porta 2"
                   />
                 </div>
-                <div class="input-port">
-                  <label class="label-port">Taxa de Transmissão:</label>
+                <div class="input-port app-focus">
+                  <label class="label-port app-focus"
+                    >Taxa de Transmissão:</label
+                  >
                   <input
                     id="input-baud-rate"
                     type="number"
-                    class="form-control element-input-port"
+                    class="form-control element-input-port app-focus"
                     value="9600"
                     placeholder="BaudRate"
                   />
                 </div>
-                <div class="menu-keyboard">
+                <div class="menu-keyboard app-focus">
                   <label>Ctr+r reload</label>
                   <label>Ctr+Shift+R force reload</label>
                   <label>Ctr+Shift+I depurador</label>
@@ -99,21 +104,25 @@
             </div>
           </div>
           <!-- MENU -->
-          <div class="pane main">
-            <div class="head-main">
-              <label for="text-logs-app " class="label-main">Depurador</label>
+          <div class="pane main app-focus">
+            <div class="head-main app-focus">
+              <label for="text-logs-app " class="label-main app-focus"
+                >Depurador</label
+              >
               <textarea
                 id="text-logs-app"
                 placeholder="logs do aplicativo"
                 disabled="disabled"
-                class="form-control"
+                class="form-control app-focus"
                 rows="5"
               ></textarea>
             </div>
-            <div class="display">
+            <div class="display app-focus">
               <div class="disp-port-1">
-                <label class="title display-name label-main">Porta 1</label>
-                <div class="div-textarea">
+                <label class="title display-name label-main app-focus"
+                  >Porta 1</label
+                >
+                <div class="div-textarea app-focus">
                   <textarea
                     id="disp-text-1"
                     placeholder="log porta 1"
@@ -122,87 +131,91 @@
                     rows="16"
                   ></textarea>
                 </div>
-                <div class="btn-group">
+                <div class="btn-group app-focus">
                   <button
                     id="btn-open-txt-port-1"
-                    class="btn btn-mini btn-primary"
+                    class="btn btn-mini btn-primary app-focus"
                   >
                     abrir
                   </button>
                   <button
                     id="btn-clean-txt-port-1"
-                    class="btn btn-mini btn-default"
+                    class="btn btn-mini btn-default app-focus"
                   >
                     limpar display
                   </button>
                   <button
                     id="btn-delete-txt-port-1"
-                    class="btn btn-mini btn-negative"
+                    class="btn btn-mini btn-negative app-focus"
                   >
                     limpar log
                   </button>
                 </div>
               </div>
-              <div class="disp-msg">
-                <label class="display-name title label-main">Mensagens</label>
+              <div class="disp-msg app-focus">
+                <label class="display-name title label-main app-focus"
+                  >Mensagens</label
+                >
                 <div class="div-textarea">
                   <textarea
                     id="disp-text-msg"
                     placeholder="log all"
                     disabled="disabled"
-                    class="form-control"
+                    class="form-control app-focus"
                     rows="16"
                   ></textarea>
                 </div>
-                <div class="btn-group">
+                <div class="btn-group app-focus">
                   <button
                     id="btn-open-txt-msg"
-                    class="btn btn-mini btn-primary"
+                    class="btn btn-mini btn-primary app-focus"
                   >
                     abrir
                   </button>
                   <button
                     id="btn-clean-txt-msg"
-                    class="btn btn-mini btn-default"
+                    class="btn btn-mini btn-default app-focus"
                   >
                     limpar display
                   </button>
                   <button
                     id="btn-delete-txt-msg"
-                    class="btn btn-mini btn-negative"
+                    class="btn btn-mini btn-negative app-focus"
                   >
                     limpar log
                   </button>
                 </div>
               </div>
-              <div class="disp-port-2">
-                <label class="display-name title label-main">Porta 2</label>
-                <div class="div-textarea">
+              <div class="disp-port-2 app-focus">
+                <label class="display-name title label-main app-focus"
+                  >Porta 2</label
+                >
+                <div class="div-textarea app-focus">
                   <textarea
                     id="disp-text-2"
                     placeholder="log porta 2"
                     disabled="disabled"
                     disabled="disabled"
-                    class="form-control"
+                    class="form-control app-focus"
                     rows="16"
                   ></textarea>
                 </div>
-                <div class="btn-group">
+                <div class="btn-group app-focus">
                   <button
                     id="btn-open-txt-port-2"
-                    class="btn btn-mini btn-primary"
+                    class="btn btn-mini btn-primary app-focus"
                   >
                     abrir
                   </button>
                   <button
                     id="btn-clean-txt-port-2"
-                    class="btn btn-mini btn-default"
+                    class="btn btn-mini btn-default app-focus"
                   >
                     limpar display
                   </button>
                   <button
                     id="btn-delete-txt-port-2"
-                    class="btn btn-mini btn-negative"
+                    class="btn btn-mini btn-negative app-focus"
                   >
                     limpar log
                   </button>
@@ -213,8 +226,8 @@
         </div>
       </div>
 
-      <footer class="toolbar toolbar-footer">
-        <h1 class="title">
+      <footer class="toolbar toolbar-footer app-focus">
+        <h1 class="title app-focus">
           <span>marcio_ods@hotmail.com</span> |
           <span>https://github.com/marcio-ods/serial_port_monitor</span>
         </h1>

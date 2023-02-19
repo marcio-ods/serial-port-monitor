@@ -14,11 +14,13 @@ const createWindow = () => {
     })
     // ipcMain.handle('ping', () => 'pong')
     router(win)
+    // win.webContents.isDevToolsOpened
     // beforeInputEvent(win)
 //     win.webContents.on("before-input-event", (event, input) => { 
 //         if(input.key==="F5" && input.type ==="keyUp")
 //          console.log(input);
 //    });
+
     win.loadFile(path.join(__dirname, 'renderer', 'index.html'))
 }
 

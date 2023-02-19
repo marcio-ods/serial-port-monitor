@@ -1,8 +1,10 @@
 const { ipcMain } = require('electron');
 const UseSerialPort = require('./core/useSerialport');
 const cleanFile = require('./utils/cleanFile');
+const devtools = require('./utils/devtools');
 const getConfigs = require('./utils/getConfigs');
 const openPath = require('./utils/openPath');
+
 
 module.exports = function route(win) {
     ipcMain.handle('router', (evt, { key, data }) => {
@@ -12,7 +14,7 @@ module.exports = function route(win) {
             case "get/setup": return getConfigs();
             case "clean-file": return cleanFile(data);
             case "open-path": return openPath(data);
-            case "open-dev-tools": return win.webContents.openDevTools();
+            case "dev-tools": return devtools(win);
             case "reload-ignoring-cache": return win.webContents.reloadIgnoringCache();
             default:
                 break;

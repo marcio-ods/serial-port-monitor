@@ -114,6 +114,14 @@ padding-left */
   background-color: yellow;
   /* border: 1px solid red; */
 }
+.app-focus {
+  /* border: 1px solid red; */
+}
+.input-focus {
+  background-color: yellow;
+  /* border: 1px solid red; */
+}
+
 .div-img-menu-active {
   border: 1px solid red;
 }
