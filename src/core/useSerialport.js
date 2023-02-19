@@ -3,6 +3,9 @@ const getConfigs = require('../utils/getConfigs')
 const setConfigs = require('../utils/setConfigs')
 
 let UniqueInstance, Port1, Port2, Win = undefined
+function isConnected() {
+    return (Port1 || Port2)
+}
 module.exports = class UseSerialPort {
 
     selfLog(id, label, msg) {
@@ -97,6 +100,9 @@ module.exports = class UseSerialPort {
         // console.log(await SerialPort.list());
     }
 
+    static isConnected() {
+        return isConnected()
+    }
     static makeUnique() {
         if (!UniqueInstance)
             UniqueInstance = new UseSerialPort()

@@ -12,12 +12,19 @@ let
     displayMsg,
     btnOnOff,
     btnOpenPath,
+    btnOpenDevTools,
+    btnReloadIgnoringCache,
     btnOpenTxtPort1,
     btnOpenTxtPort2,
     btnOpenTxtMsg,
+    btnDeleteTxtPort1,
+    btnDeleteTxtPort2,
+    btnDeleteTxtMsg,
     btnCleanTxtPort1,
     btnCleanTxtPort2,
     btnCleanTxtMsg;
+// imageMenu;
+
 
 
 const btnDeleteDisabled = (btn) => {
@@ -33,6 +40,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     // navigator.serial.addEventListener('connect', (e) => {
     //     // Connect to `e.target` or add it to a list of available ports.
     // });
+    // imageMenu = document.getElementById('div-img-menu')
 
     inputPort1 = document.getElementById('input-port-1')
     inputPort2 = document.getElementById('input-port-2')
@@ -48,6 +56,8 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     // buttons    
     btnOpenPath = document.getElementById('btn-open-path')
+    btnOpenDevTools = document.getElementById('btn-open-dev-tools')
+    btnReloadIgnoringCache = document.getElementById('btn-reload-ignoring-cache')
     btnOnOff = document.getElementById('btn-on-off')
     btnOpenTxtMsg = document.getElementById('btn-open-txt-msg')
     btnOpenTxtPort1 = document.getElementById('btn-open-txt-port-1')
@@ -88,56 +98,81 @@ window.addEventListener('DOMContentLoaded', async () => {
                 }
             })
         }
-        // const socket = await window.api.socket({ key: 'get/setup' })
-
-        // btnConnect. 
-        // setTimeout(() => {
-        //     //     window.api.connect().send('on:port', 'disconnect')
-
-        // }, 1000)
-        // socket.send('asynchronous-message', 'ping')
-        // console.log(socket);
     }
 
-    // if (btnDisConnect) btnDisConnect.onclick = () => {
-    //     serialPort?.send('on:port', 'disconnect')
-    // }
+
 
     if (btnCleanTxtMsg) btnCleanTxtMsg.onclick = () => displayMsg.value = ""
     if (btnCleanTxtPort1) btnCleanTxtPort1.onclick = () => dispPort1.value = ""
     if (btnCleanTxtPort2) btnCleanTxtPort2.onclick = () => dispPort2.value = ""
 
     if (btnOpenPath) btnOpenPath.onclick = async () => window.api.request({ key: 'open-path' })
-    if (btnOpenTxtMsg) btnOpenTxtMsg.onclick = () => window.api.request({ key: 'open-txt-msg' })
-    if (btnOpenTxtPort1) btnOpenTxtPort1.onclick = () => window.api.request({ key: 'open-txt-port-1' })
-    if (btnOpenTxtPort2) btnOpenTxtPort2.onclick = () => window.api.request({ key: 'open-txt-port-2' })
+    if (btnOpenTxtMsg) btnOpenTxtMsg.onclick = async () => window.api.request({ key: 'open-path', data: "log_msg.txt" })
+    if (btnOpenTxtPort1) btnOpenTxtPort1.onclick = async () => window.api.request({ key: 'open-path', data: "log_port_1.txt" })
+    if (btnOpenTxtPort2) btnOpenTxtPort2.onclick = async () => window.api.request({ key: 'open-path', data: "log_port_2.txt" })
 
-    if (btnOpenTxtMsg) btnOpenTxtMsg.onclick = () => window.api.request({ key: 'open-txt-msg' })
-    if (btnOpenTxtPort1) btnOpenTxtPort1.onclick = () => window.api.request({ key: 'open-txt-port-1' })
-    if (btnOpenTxtPort2) btnOpenTxtPort2.onclick = () => window.api.request({ key: 'open-txt-port-2' })
+    if (btnOpenDevTools) btnOpenDevTools.onclick = async () => window.api.request({ key: 'open-dev-tools' })
+
+
+    if (btnReloadIgnoringCache) btnReloadIgnoringCache.onclick = async () => {
+        if (btnOnOff.value === "on") {
+            btnOnOff.value = "off";
+            btnOnOff.checked = false;
+            await serialPort?.send('on:port', { key: 'disconnect' })
+        }
+        window.api.request({ key: 'reload-ignoring-cache' })
+    }
 
 
     if (btnDeleteTxtMsg) btnDeleteTxtMsg.onclick = async () => {
         displayMsg.value = ""
         btnDeleteDisabled(btnOpenTxtMsg)
-        await window.api.request({ key: 'delete-txt-msg' })
+        await window.api.request({ key: 'clean-file', data: "log_msg.txt" })
         btnDeleteActive(btnOpenTxtMsg)
     }
 
     if (btnDeleteTxtPort1) btnDeleteTxtPort1.onclick = async () => {
         dispPort1.value = ""
         btnDeleteDisabled(btnOpenTxtPort1)
-        await window.api.request({ key: 'delete-txt-port-1' })
+        await window.api.request({ key: 'clean-file', data: "log_port_1.txt" })
         btnDeleteActive(btnOpenTxtPort1)
     }
 
     if (btnDeleteTxtPort2) btnDeleteTxtPort2.onclick = async () => {
         dispPort2.value = ""
         btnDeleteDisabled(btnOpenTxtPort2)
-        await window.api.request({ key: 'delete-txt-port-2' })
+        await window.api.request({ key: 'clean-file', data: "log_port_2.txt" })
         btnDeleteActive(btnOpenTxtPort2)
     }
 
+
+    addEventListener('keydown', (event) => {
+        // console.log(event);
+        if (event.key === "F1")
+            btnOpenTxtPort1.click();
+        if (event.key === "F2")
+            btnOpenTxtPort2.click();
+        if (event.key === "F3")
+            btnOpenTxtMsg.click();
+        if (event.key === "F4")
+            btnOpenPath.click();
+        if (event.key === "F5")
+            btnOnOff.click();
+    });
+    // object.addEventListener("focusout", myScript);
+    addEventListener('focus', (event) => {
+        directory?.classList.add("app-active")
+        // imageMenu.add("app-active")
+    });
+
+    addEventListener('focusin', (event) => {
+        directory?.classList.add("app-active")
+        // imageMenu.add("app-active")
+    });
+
+    addEventListener('focusout', (event) => {
+        directory?.classList.remove("app-active")
+    });
     // if (element) element.innerText = text
 
 })

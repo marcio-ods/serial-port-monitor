@@ -1,3 +1,4 @@
+/* #fb2f29 #fb2f29 #fb1710; */
 .menu {
   margin: 1em;
   max-width: 300px;
@@ -108,6 +109,13 @@ padding-left */
 
 .element-input-port {
   text-align: center;
+}
+.app-active {
+  background-color: yellow;
+  /* border: 1px solid red; */
+}
+.div-img-menu-active {
+  border: 1px solid red;
 }
 #img-menu {
   padding: 0.5em;

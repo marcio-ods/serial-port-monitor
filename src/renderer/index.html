@@ -26,10 +26,13 @@
             disabled="disabled"
           />
 
-          <button id="btn-reload" class="btn btn-mini btn-default">
+          <button
+            id="btn-reload-ignoring-cache"
+            class="btn btn-mini btn-default"
+          >
             Force Reload
           </button>
-          <button id="btn-open-debugger" class="btn btn-mini btn-default">
+          <button id="btn-open-dev-tools" class="btn btn-mini btn-default">
             Depurador
           </button>
         </div>
@@ -45,14 +48,16 @@
         <div class="pane-group">
           <!-- MENU -->
           <div class="pane-sm sidebar">
-            <a href="https://github.com/marcio-ods/serial_port_monitor">
+            <!-- <a href="https://github.com/marcio-ods/serial_port_monitor"> -->
+            <div id="div-img-menu">
               <img
                 id="img-menu"
                 src="./serial-port-icon-12.jpg"
                 width="150"
                 height="120"
               />
-            </a>
+            </div>
+            <!-- </a> -->
             <div class="menu">
               <div class="form-group">
                 <div class="input-port">
@@ -128,13 +133,13 @@
                     id="btn-clean-txt-port-1"
                     class="btn btn-mini btn-default"
                   >
-                    limpar console
+                    limpar display
                   </button>
                   <button
                     id="btn-delete-txt-port-1"
                     class="btn btn-mini btn-negative"
                   >
-                    excluir log
+                    limpar log
                   </button>
                 </div>
               </div>
@@ -160,13 +165,13 @@
                     id="btn-clean-txt-msg"
                     class="btn btn-mini btn-default"
                   >
-                    limpar console
+                    limpar display
                   </button>
                   <button
                     id="btn-delete-txt-msg"
                     class="btn btn-mini btn-negative"
                   >
-                    excluir log
+                    limpar log
                   </button>
                 </div>
               </div>
@@ -193,13 +198,13 @@
                     id="btn-clean-txt-port-2"
                     class="btn btn-mini btn-default"
                   >
-                    limpar console
+                    limpar display
                   </button>
                   <button
                     id="btn-delete-txt-port-2"
                     class="btn btn-mini btn-negative"
                   >
-                    excluir log
+                    limpar log
                   </button>
                 </div>
               </div>
